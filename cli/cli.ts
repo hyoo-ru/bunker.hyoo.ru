@@ -9,17 +9,17 @@ namespace $ {
 
 		secret( path: string, auto?: 'auto' ) {
 			const [ root, ...keys ] = path.split('/')
-			return this.peer()?.Secrets()?.key( root ).remote()?.kid( keys, auto )
+			return this.peer()?.Secrets(null)?.key( root, 'auto' ).ensure( {} )?.kid( keys, auto )
 		}
 
 		@ $mol_action
 		get( path: string ) {
-			return this.secret( path )?.Values()?.current()?.val()
+			return this.secret( path )?.value()
 		}
 
 		@ $mol_action
 		put( path: string, value: string ) {
-			return this.secret( path, 'auto' )?.Values(value)?.current(value)?.val( value )
+			return this.secret( path, 'auto' )?.value( value )
 		}
 
 		@ $mol_action

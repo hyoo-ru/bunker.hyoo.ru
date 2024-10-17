@@ -15,7 +15,7 @@ namespace $ {
 			const kid = this.Kids()?.key( path[0] ).remote() 
 				?? auto ? this.kid_make( path[0] ) : null
 			
-			return path.length == 1 ? kid : kid?.kid( path.slice( 1 ) )
+			return path.length == 1 ? kid : kid?.kid( path.slice( 1 ), auto )
 		}
 
 		@ $mol_mem_key
