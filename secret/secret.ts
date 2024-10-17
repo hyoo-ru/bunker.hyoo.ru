@@ -12,7 +12,9 @@ namespace $ {
 		}
 
 		kid( path: string[], auto?: 'auto' ): $hyoo_bunker_secret | null | undefined {
-			const kid = this.Kids()?.key( path[0] ).remote() 
+			if( path.length == 0 ) return this
+
+			const kid = this.Kids()?.key( path[0] )?.remote() 
 				?? auto ? this.kid_make( path[0] ) : null
 			
 			return path.length == 1 ? kid : kid?.kid( path.slice( 1 ), auto )
@@ -31,7 +33,9 @@ namespace $ {
 		@ $mol_action
 		join( lord: $hyoo_crus_ref, rank: $hyoo_crus_rank ) {
 
-			this.Values()?.current()?.land().lord_rank( lord, rank )
+			const key = this.$.$hyoo_crus_glob.Node( lord, $hyoo_bunker_peer ).land().key()
+			console.log('key', key)
+			this.Values()?.current()?.land().give( key, rank )
 
 			this.Kids()?.keys().forEach( k => {
 				this.Kids()?.key( k ).remote()?.join( lord, rank )
@@ -42,7 +46,8 @@ namespace $ {
 		@ $mol_action
 		deny( lord: $hyoo_crus_ref ) {
 
-			this.Values()?.current()?.land().lord_rank( lord, $hyoo_crus_rank.nil )
+			const key = this.$.$hyoo_crus_glob.Node( lord, $hyoo_bunker_peer ).land().key()
+			this.Values()?.current()?.land().give( key, $hyoo_crus_rank.nil )
 			this.Values()?.up()
 
 			this.Kids()?.keys().forEach( k => {
