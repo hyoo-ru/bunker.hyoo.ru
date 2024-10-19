@@ -12622,7 +12622,7 @@ var $;
         }
         join(lord, rank) {
             const key = this.$.$hyoo_crus_glob.Node(lord, $hyoo_bunker_peer).land().key();
-            console.log('key', key);
+            this.land().give(key, rank);
             this.Values()?.current()?.land().give(key, rank);
             this.Kids()?.keys().forEach(k => {
                 this.Kids()?.key(k).remote()?.join(lord, rank);
@@ -12630,6 +12630,7 @@ var $;
         }
         deny(lord) {
             const key = this.$.$hyoo_crus_glob.Node(lord, $hyoo_bunker_peer).land().key();
+            this.land().give(key, $hyoo_crus_rank.nil);
             this.Values()?.current()?.land().give(key, $hyoo_crus_rank.nil);
             this.Values()?.up();
             this.Kids()?.keys().forEach(k => {
