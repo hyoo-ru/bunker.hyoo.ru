@@ -12637,9 +12637,8 @@ var $;
                 this.Kids()?.key(k).remote()?.deny(lord);
             });
         }
-        lord_ranks() {
-            const land = this.land();
-            return land.joined_list().map(lord => [lord, land.lord_rank(lord)]);
+        ranks() {
+            return $hyoo_bunker_ranks_from_land(this.land());
         }
     }
     __decorate([
@@ -12656,7 +12655,7 @@ var $;
     ], $hyoo_bunker_secret.prototype, "deny", null);
     __decorate([
         $mol_mem
-    ], $hyoo_bunker_secret.prototype, "lord_ranks", null);
+    ], $hyoo_bunker_secret.prototype, "ranks", null);
     $.$hyoo_bunker_secret = $hyoo_bunker_secret;
 })($ || ($ = {}));
 
