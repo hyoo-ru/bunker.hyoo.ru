@@ -17,6 +17,7 @@
 	pack aura git \https://github.com/hyoo-ru/aura.hyoo.ru.git
 	pack bench git \https://github.com/hyoo-ru/bench.hyoo.ru.git
 	pack board git \https://github.com/hyoo-ru/board.hyoo.ru.git
+	pack bunker git \https://github.com/hyoo-ru/bunker.hyoo.ru.git
 	pack calc git \https://github.com/hyoo-ru/calc.hyoo.ru.git
 	pack case git \https://github.com/hyoo-ru/case.hyoo.ru.git
 	pack crowd git \https://github.com/hyoo-ru/crowd.hyoo.ru.git
@@ -71,3 +72,7 @@
 	pack home git \https://github.com/hyoo-ru/hyoo.ru.git
 	pack idea git \https://github.com/hyoo-ru/idea.hyoo.ru.git
 	pack intern git \https://github.com/hyoo-ru/intern.hyoo.ru.git
+\/mol
+	pack icon git \https://github.com/nin-jin/mol_icon.git
+\/mol/view
+	include \/mol/view/tree/test
