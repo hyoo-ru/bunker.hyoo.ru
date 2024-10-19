@@ -12605,7 +12605,7 @@ var $;
         Values: $hyoo_bunker_values,
     }) {
         value(next) {
-            return this.Values(next)?.current(next)?.val(next);
+            return this.Values(next)?.current(next)?.val(next) ?? '';
         }
         kid(path, auto) {
             if (path.length == 0)
@@ -12860,12 +12860,17 @@ var $;
 
 ;
 	($.$hyoo_bunker_secret_page) = class $hyoo_bunker_secret_page extends ($.$mol_page) {
+		title(next){
+			if(next !== undefined) return next;
+			return "";
+		}
 		value(next){
 			if(next !== undefined) return next;
 			return "";
 		}
 		Value(){
 			const obj = new this.$.$mol_password();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$hyoo_bunker_secret_page_Value_hint")));
 			(obj.value) = (next) => ((this?.value(next)));
 			return obj;
 		}
@@ -12873,13 +12878,21 @@ var $;
 			const obj = new this.$.$hyoo_bunker_secret();
 			return obj;
 		}
+		Title(){
+			const obj = new this.$.$mol_string();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$hyoo_bunker_secret_page_Title_hint")));
+			(obj.value) = (next) => ((this?.title(next)));
+			return obj;
+		}
 		body(){
 			return [(this?.Value())];
 		}
 	};
+	($mol_mem(($.$hyoo_bunker_secret_page.prototype), "title"));
 	($mol_mem(($.$hyoo_bunker_secret_page.prototype), "value"));
 	($mol_mem(($.$hyoo_bunker_secret_page.prototype), "Value"));
 	($mol_mem(($.$hyoo_bunker_secret_page.prototype), "secret"));
+	($mol_mem(($.$hyoo_bunker_secret_page.prototype), "Title"));
 
 
 ;
@@ -12892,6 +12905,9 @@ var $;
     var $$;
     (function ($$) {
         class $hyoo_bunker_secret_page extends $.$hyoo_bunker_secret_page {
+            title(next) {
+                return this.secret().title(next);
+            }
             value(next) {
                 return this.secret().value(next);
             }
@@ -12923,6 +12939,7 @@ var $;
 		}
 		Secret_new(){
 			const obj = new this.$.$mol_button_minor();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$hyoo_bunker_app_Secret_new_hint")));
 			(obj.click) = (next) => ((this?.secret_new(next)));
 			(obj.sub) = () => ([(this?.Secret_new_icon())]);
 			return obj;
@@ -12934,6 +12951,7 @@ var $;
 		Secret(id){
 			const obj = new this.$.$hyoo_bunker_secret_page();
 			(obj.secret) = () => ((this?.secret(id)));
+			(obj.tools) = () => ([(this?.Spread_close(id))]);
 			return obj;
 		}
 		menu_title(){
@@ -12957,14 +12975,14 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $hyoo_bunker_actor extends $hyoo_crus_entity.with({
+    class $hyoo_bunker_actor extends $hyoo_crus_home.with({
         Secrets: $hyoo_crus_list_ref_to(() => $hyoo_bunker_secret),
     }) {
         secrets(auto) {
             return this.Secrets(auto)?.remote_list() ?? [];
         }
         secret_make() {
-            return this.Secrets(null).make({});
+            return this.Secrets(null).make({ '': $hyoo_crus_rank.nil });
         }
     }
     __decorate([
@@ -12990,7 +13008,8 @@ var $;
                 return this.actor().secrets().map(secret => secret.ref().description);
             }
             secret_new() {
-                this.actor().secret_make();
+                const secret = this.actor().secret_make();
+                this.$.$mol_state_arg.go({ '': secret.ref().description });
             }
             secret(id) {
                 return this.$.$hyoo_crus_glob.Node($hyoo_crus_ref(id), $hyoo_bunker_secret);

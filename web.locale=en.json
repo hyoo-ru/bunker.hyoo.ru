@@ -1,5 +1,8 @@
 {
+	"$hyoo_bunker_app_Secret_new_hint": "New Secret",
 	"$hyoo_bunker_app_menu_title": "Bunker",
+	"$hyoo_bunker_secret_page_Title_hint": "name",
+	"$hyoo_bunker_secret_page_Value_hint": "value",
 	"$mol_book2_catalog_Spread_close_hint": "Close page",
 	"$mol_search_Clear_hint": "Clear",
 	"$mol_search_hint": "Search..."

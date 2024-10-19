@@ -358,16 +358,23 @@ $mol_password $mol_view
 
 $hyoo_bunker_secret_page $mol_page
 	secret $hyoo_bunker_secret
+	Title $mol_string
+		hint @ \name
+		value? <=> title? \
 	body /
 		<= Value $mol_password
+			hint @ \value
 			value? <=> value? \
 
 $hyoo_bunker_app $mol_book2_catalog
 	menu_title @ \Bunker
 	menu_tools /
 		<= Secret_new $mol_button_minor
+			hint @ \New Secret
 			click? <=> secret_new? null
 			sub /
 				<= Secret_new_icon $mol_icon_plus
 	Spread* <= Secret* $hyoo_bunker_secret_page
 		secret <= secret* $hyoo_bunker_secret
+		tools /
+			<= Spread_close*
