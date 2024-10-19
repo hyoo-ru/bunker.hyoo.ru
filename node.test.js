@@ -12426,58 +12426,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    function $hyoo_bunker_ranks_from_land(land) {
-        const ranks = {};
-        const passes = land.pass.values();
-        for (const pass of passes) {
-            const auth = pass.auth();
-            const key = $hyoo_crus_auth.from(auth).public().toString();
-            const lord = pass.lord();
-            const rank = land.lord_rank(lord);
-            ranks[key] = rank;
-        }
-        return ranks;
-    }
-    $.$hyoo_bunker_ranks_from_land = $hyoo_bunker_ranks_from_land;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $hyoo_bunker_values extends $hyoo_crus_list_ref_to(() => $hyoo_crus_atom_str) {
-        current(auto) {
-            const last = this.remote_list().at(-1);
-            if (last)
-                return last;
-            if (auto === undefined)
-                return;
-            const ranks = $hyoo_bunker_ranks_from_land(this.land());
-            const first = this.make(ranks);
-            return first;
-        }
-        up() {
-            const cur = this.current();
-            if (cur === undefined)
-                return;
-            const ranks = $hyoo_bunker_ranks_from_land(cur.land());
-            const next = this.make(ranks);
-            next?.val(cur.val());
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $hyoo_bunker_values.prototype, "current", null);
-    __decorate([
-        $mol_action
-    ], $hyoo_bunker_values.prototype, "up", null);
-    $.$hyoo_bunker_values = $hyoo_bunker_values;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
     class $hyoo_crus_home extends $hyoo_crus_entity.with({
         Selection: $hyoo_crus_atom_str,
         Hall: $hyoo_crus_atom_ref_to(() => $hyoo_crus_dict),
@@ -12593,6 +12541,58 @@ var $;
         $mol_action
     ], $hyoo_crus_glob, "apply_parts", null);
     $.$hyoo_crus_glob = $hyoo_crus_glob;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $hyoo_bunker_ranks_from_land(land) {
+        const ranks = {};
+        for (const [lord, gift] of land.gift.entries()) {
+            const auth = $hyoo_crus_glob.Node($hyoo_crus_ref(lord), $hyoo_bunker_peer).land().key();
+            const rank = gift.rank();
+            const key = auth.toString();
+            if (key == $hyoo_crus_auth.current().public().toString())
+                continue;
+            ranks[key] = rank;
+        }
+        return ranks;
+    }
+    $.$hyoo_bunker_ranks_from_land = $hyoo_bunker_ranks_from_land;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $hyoo_bunker_values extends $hyoo_crus_list_ref_to(() => $hyoo_crus_atom_str) {
+        current(auto) {
+            const last = this.remote_list().at(-1);
+            if (last)
+                return last;
+            if (auto === undefined)
+                return;
+            const ranks = $hyoo_bunker_ranks_from_land(this.land());
+            const first = this.make(ranks);
+            return first;
+        }
+        up() {
+            const cur = this.current();
+            if (cur === undefined)
+                return;
+            const ranks = $hyoo_bunker_ranks_from_land(cur.land());
+            const next = this.make(ranks);
+            next?.val(cur.val());
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $hyoo_bunker_values.prototype, "current", null);
+    __decorate([
+        $mol_action
+    ], $hyoo_bunker_values.prototype, "up", null);
+    $.$hyoo_bunker_values = $hyoo_bunker_values;
 })($ || ($ = {}));
 
 ;
