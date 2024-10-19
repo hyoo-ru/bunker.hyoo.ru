@@ -1,0 +1,9 @@
+$hyoo_bunker_app $mol_book2_catalog
+	menu_title @ \Bunker
+	menu_tools /
+		<= Secret_new $mol_button_minor
+			click? <=> secret_new? null
+			sub /
+				<= Secret_new_icon $mol_icon_plus
+	Spread* <= Secret* $hyoo_bunker_secret_page
+		secret <= secret* $hyoo_bunker_secret
