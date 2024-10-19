@@ -8,11 +8,12 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		override spread_ids() {
-			return this.actor().secrets().map( secret => secret.ref().description )
+			return this.actor().secrets().map( secret => secret.ref().description! )
 		}
 		
 		override secret_new() {
-			this.actor().secret_make()
+			const secret = this.actor().secret_make()
+			this.$.$mol_state_arg.go({ '': secret.ref().description! })
 		}
 		
 		override secret( id: string ) {

@@ -8,7 +8,7 @@ namespace $ {
 
 		@ $mol_mem
 		value( next?: string ) {
-			return this.Values( next )?.current( next )?.val( next )
+			return this.Values( next )?.current( next )?.val( next ) ?? ''
 		}
 
 		kid( path: string[], auto?: 'auto' ): $hyoo_bunker_secret | null | undefined {

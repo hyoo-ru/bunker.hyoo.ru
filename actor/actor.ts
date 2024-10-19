@@ -1,6 +1,6 @@
 namespace $ {
 
-	export class $hyoo_bunker_actor extends $hyoo_crus_entity.with({
+	export class $hyoo_bunker_actor extends $hyoo_crus_home.with({
 
 		Secrets: $hyoo_crus_list_ref_to( ()=> $hyoo_bunker_secret ),
 		
@@ -12,7 +12,7 @@ namespace $ {
 		
 		@ $mol_action
 		secret_make() {
-			return this.Secrets( null )!.make({})
+			return this.Secrets( null )!.make({ '': $hyoo_crus_rank.nil })
 		}
 		
 	}
