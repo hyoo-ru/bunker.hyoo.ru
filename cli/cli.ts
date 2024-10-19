@@ -92,8 +92,8 @@ namespace $ {
 		}
 
 		@ $mol_action
-		lord_ranks( path: string ) {
-			const ranks = this._secret( path )?.lord_ranks()
+		ranks( path: string ) {
+			const ranks = this._secret( path )?.ranks()
 			console.log(ranks)
 		}
 

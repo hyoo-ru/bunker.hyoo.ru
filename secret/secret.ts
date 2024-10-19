@@ -58,9 +58,8 @@ namespace $ {
 		}
 
 		@ $mol_mem
-		lord_ranks() {
-			const land = this.land()
-			return land.joined_list().map( lord => [ lord, land.lord_rank( lord ) ] )
+		ranks() {
+			return $hyoo_bunker_ranks_from_land( this.land() )
 		}
 
 	}
