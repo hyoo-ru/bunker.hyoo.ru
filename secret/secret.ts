@@ -3,13 +3,14 @@ namespace $ {
 	export class $hyoo_bunker_secret extends $hyoo_crus_entity.with({
 		Parent: $hyoo_crus_atom_ref_to( ()=> $hyoo_bunker_secret ),
 		Kids: $hyoo_crus_dict_to( $hyoo_crus_atom_ref_to( ()=> $hyoo_bunker_secret ) ),
+		Value: $hyoo_crus_atom_str,
 		Values: $hyoo_bunker_values,
 		Description: $hyoo_crus_text,
 	}){
 
 		@ $mol_mem
 		value( next?: string ) {
-			return this.Values( next )?.current( next )?.val( next ) ?? ''
+			return this.Value( next )?.val( next ) ?? ''
 		}
 		
 		@ $mol_mem
