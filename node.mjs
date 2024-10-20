@@ -14189,6 +14189,413 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_avatar) = class $mol_avatar extends ($.$mol_icon) {
+		view_box(){
+			return "0 0 24 24";
+		}
+		id(){
+			return "";
+		}
+		path(){
+			return "M 12 12 l 0 0 M 0 0 l 0 0 M 24 24 l 0 0 M 0 24 l 0 0 M 24 0 l 0 0";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_avatar extends $.$mol_avatar {
+            path() {
+                const id = $mol_hash_string(this.id());
+                const p = 2.1;
+                const m = 2.7;
+                let path = '';
+                for (let x = 0; x < 4; ++x) {
+                    for (let y = 0; y < 8; ++y) {
+                        if ((id >> (x + y * 7)) & 1) {
+                            const mxp = Math.ceil(m * x + p);
+                            const myp = Math.ceil(m * y + p);
+                            path += `M ${mxp} ${myp} l 0 0 ` + `M ${24 - mxp} ${myp} l 0 0 `;
+                        }
+                    }
+                }
+                return path;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_avatar.prototype, "path", null);
+        $$.$mol_avatar = $mol_avatar;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/avatar/avatar.view.css", "[mol_avatar] {\n\tstroke-linecap: round;\n\tstroke-width: 3.5px;\n\tfill: none;\n\tstroke: currentColor;\n\t/* width: 1.5rem;\n\theight: 1.5rem;\n\tmargin: 0 -.25rem; */\n\t/* box-shadow: 0 0 0 1px var(--mol_theme_line); */\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_check_list) = class $mol_check_list extends ($.$mol_view) {
+		option_checked(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		option_title(id){
+			return "";
+		}
+		option_label(id){
+			return [(this?.option_title(id))];
+		}
+		enabled(){
+			return true;
+		}
+		option_enabled(id){
+			return (this?.enabled());
+		}
+		option_hint(id){
+			return "";
+		}
+		items(){
+			return [];
+		}
+		dictionary(){
+			return {};
+		}
+		Option(id){
+			const obj = new this.$.$mol_check();
+			(obj.checked) = (next) => ((this?.option_checked(id, next)));
+			(obj.label) = () => ((this?.option_label(id)));
+			(obj.enabled) = () => ((this?.option_enabled(id)));
+			(obj.hint) = () => ((this?.option_hint(id)));
+			(obj.minimal_height) = () => (24);
+			return obj;
+		}
+		options(){
+			return {};
+		}
+		keys(){
+			return [];
+		}
+		sub(){
+			return (this?.items());
+		}
+	};
+	($mol_mem_key(($.$mol_check_list.prototype), "option_checked"));
+	($mol_mem_key(($.$mol_check_list.prototype), "Option"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_check_list extends $.$mol_check_list {
+            options() {
+                return {};
+            }
+            dictionary(next) {
+                return next ?? {};
+            }
+            option_checked(id, next) {
+                const prev = this.dictionary();
+                if (next === undefined)
+                    return prev[id] ?? null;
+                const next_rec = { ...prev, [id]: next };
+                if (next === null)
+                    delete next_rec[id];
+                return this.dictionary(next_rec)[id] ?? null;
+            }
+            keys() {
+                return Object.keys(this.options());
+            }
+            items() {
+                return this.keys().map(key => this.Option(key));
+            }
+            option_title(key) {
+                return this.options()[key] || key;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_check_list.prototype, "keys", null);
+        __decorate([
+            $mol_mem
+        ], $mol_check_list.prototype, "items", null);
+        $$.$mol_check_list = $mol_check_list;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/check/list/list.view.css", "[mol_check_list] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tflex: 1 1 auto;\n\tborder-radius: var(--mol_gap_round);\n\tgap: 1px;\n}\n\n[mol_check_list_option] {\n\tflex: 0 1 auto;\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"]) {\n\ttext-shadow: 0 0;\n\tcolor: var(--mol_theme_current);\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"][disabled]) {\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_switch) = class $mol_switch extends ($.$mol_check_list) {
+		value(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+	};
+	($mol_mem(($.$mol_switch.prototype), "value"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_state_session extends $mol_object {
+        static 'native()';
+        static native() {
+            if (this['native()'])
+                return this['native()'];
+            check: try {
+                const native = $mol_dom_context.sessionStorage;
+                if (!native)
+                    break check;
+                native.setItem('', '');
+                native.removeItem('');
+                return this['native()'] = native;
+            }
+            catch (error) {
+                console.warn(error);
+            }
+            return this['native()'] = {
+                getItem(key) {
+                    return this[':' + key];
+                },
+                setItem(key, value) {
+                    this[':' + key] = value;
+                },
+                removeItem(key) {
+                    this[':' + key] = void 0;
+                }
+            };
+        }
+        static value(key, next) {
+            if (next === void 0)
+                return JSON.parse(this.native().getItem(key) || 'null');
+            if (next === null)
+                this.native().removeItem(key);
+            else
+                this.native().setItem(key, JSON.stringify(next));
+            return next;
+        }
+        prefix() { return ''; }
+        value(key, next) {
+            return $mol_state_session.value(this.prefix() + '.' + key, next);
+        }
+    }
+    __decorate([
+        $mol_mem_key
+    ], $mol_state_session, "value", null);
+    $.$mol_state_session = $mol_state_session;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_switch extends $.$mol_switch {
+            value(next) {
+                return $mol_state_session.value(`${this}.value()`, next) ?? '';
+            }
+            option_checked(key, next) {
+                if (next === undefined)
+                    return this.value() == key;
+                this.value(next ? key : '');
+                return next;
+            }
+        }
+        $$.$mol_switch = $mol_switch;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$hyoo_crus_land_rights) = class $hyoo_crus_land_rights extends ($.$mol_list) {
+		add_key(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		add_commit(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Add_key(){
+			const obj = new this.$.$mol_string();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$hyoo_crus_land_rights_Add_key_hint")));
+			(obj.value) = (next) => ((this?.add_key(next)));
+			(obj.commit) = (next) => ((this?.add_commit(next)));
+			return obj;
+		}
+		Add_commit_icon(){
+			const obj = new this.$.$mol_icon_plus();
+			return obj;
+		}
+		Add_commit(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this?.add_commit(next)));
+			(obj.sub) = () => ([(this?.Add_commit_icon())]);
+			return obj;
+		}
+		Add(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this?.Add_key()), (this?.Add_commit())]);
+			return obj;
+		}
+		peer_id(id){
+			return "";
+		}
+		Gift_avatar(id){
+			const obj = new this.$.$mol_avatar();
+			(obj.id) = () => ((this?.peer_id(id)));
+			return obj;
+		}
+		peer_name(id){
+			return "";
+		}
+		Gift_name(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this?.peer_name(id)));
+			return obj;
+		}
+		Gift_peer(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this?.Gift_avatar(id)), (this?.Gift_name(id))]);
+			return obj;
+		}
+		gift_rank(id, next){
+			if(next !== undefined) return next;
+			return "nil";
+		}
+		Gift_rank(id){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this?.gift_rank(id, next)));
+			(obj.options) = () => ({
+				"nil": (this.$.$mol_locale.text("$hyoo_crus_land_rights_Gift_rank_options_nil")), 
+				"get": (this.$.$mol_locale.text("$hyoo_crus_land_rights_Gift_rank_options_get")), 
+				"reg": (this.$.$mol_locale.text("$hyoo_crus_land_rights_Gift_rank_options_reg")), 
+				"mod": (this.$.$mol_locale.text("$hyoo_crus_land_rights_Gift_rank_options_mod")), 
+				"law": (this.$.$mol_locale.text("$hyoo_crus_land_rights_Gift_rank_options_law"))
+			});
+			return obj;
+		}
+		Gift(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this?.Gift_peer(id)), (this?.Gift_rank(id))]);
+			return obj;
+		}
+		gifts(){
+			return [(this?.Gift("0"))];
+		}
+		land(){
+			const obj = new this.$.$hyoo_crus_land();
+			return obj;
+		}
+		rows(){
+			return [(this?.Add()), ...(this.gifts())];
+		}
+	};
+	($mol_mem(($.$hyoo_crus_land_rights.prototype), "add_key"));
+	($mol_mem(($.$hyoo_crus_land_rights.prototype), "add_commit"));
+	($mol_mem(($.$hyoo_crus_land_rights.prototype), "Add_key"));
+	($mol_mem(($.$hyoo_crus_land_rights.prototype), "Add_commit_icon"));
+	($mol_mem(($.$hyoo_crus_land_rights.prototype), "Add_commit"));
+	($mol_mem(($.$hyoo_crus_land_rights.prototype), "Add"));
+	($mol_mem_key(($.$hyoo_crus_land_rights.prototype), "Gift_avatar"));
+	($mol_mem_key(($.$hyoo_crus_land_rights.prototype), "Gift_name"));
+	($mol_mem_key(($.$hyoo_crus_land_rights.prototype), "Gift_peer"));
+	($mol_mem_key(($.$hyoo_crus_land_rights.prototype), "gift_rank"));
+	($mol_mem_key(($.$hyoo_crus_land_rights.prototype), "Gift_rank"));
+	($mol_mem_key(($.$hyoo_crus_land_rights.prototype), "Gift"));
+	($mol_mem(($.$hyoo_crus_land_rights.prototype), "land"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $hyoo_crus_land_rights extends $.$hyoo_crus_land_rights {
+            gifts() {
+                const self = this.land().ref();
+                return [...this.land().gift.keys()]
+                    .filter(ref => ref.description && (self !== ref))
+                    .map(ref => this.Gift(ref.description));
+            }
+            peer_id(id) {
+                return id;
+            }
+            peer_name(id) {
+                return this.$.$hyoo_crus_glob.Node($hyoo_crus_ref(id), $hyoo_crus_entity).title() || id;
+            }
+            gift_rank(id, next) {
+                return $hyoo_crus_rank[this.land().lord_rank($hyoo_crus_ref(id), next && $hyoo_crus_rank[next])];
+            }
+            add_commit() {
+                const auth = $hyoo_crus_auth.from(this.add_key());
+                this.land().give(auth, $hyoo_crus_rank.get);
+                this.add_key('');
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $hyoo_crus_land_rights.prototype, "gifts", null);
+        __decorate([
+            $mol_mem_key
+        ], $hyoo_crus_land_rights.prototype, "gift_rank", null);
+        $$.$hyoo_crus_land_rights = $hyoo_crus_land_rights;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($hyoo_crus_land_rights, {
+            Gift_peer: {
+                flex: {
+                    grow: 1,
+                },
+                padding: $mol_gap.text,
+                gap: $mol_gap.text,
+            },
+            Gift_rank: {
+                flex: {
+                    grow: 0,
+                },
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$mol_string_button) = class $mol_string_button extends ($.$mol_string) {};
 
 
@@ -14345,6 +14752,21 @@ var $;
 			(obj.Content) = () => ((this?.Description()));
 			return obj;
 		}
+		land(){
+			const obj = new this.$.$hyoo_crus_land();
+			return obj;
+		}
+		Gifts(){
+			const obj = new this.$.$hyoo_crus_land_rights();
+			(obj.land) = () => ((this?.land()));
+			return obj;
+		}
+		Gifts_block(){
+			const obj = new this.$.$mol_form_field();
+			(obj.name) = () => ("Rights");
+			(obj.Content) = () => ((this?.Gifts()));
+			return obj;
+		}
 		visible(next){
 			if(next !== undefined) return next;
 			return true;
@@ -14373,7 +14795,11 @@ var $;
 			return obj;
 		}
 		body(){
-			return [(this?.Value_block()), (this?.Description_block())];
+			return [
+				(this?.Value_block()), 
+				(this?.Description_block()), 
+				(this?.Gifts_block())
+			];
 		}
 		foot(){
 			return [(this?.Visible())];
@@ -14386,6 +14812,9 @@ var $;
 	($mol_mem(($.$hyoo_bunker_secret_page.prototype), "description"));
 	($mol_mem(($.$hyoo_bunker_secret_page.prototype), "Description"));
 	($mol_mem(($.$hyoo_bunker_secret_page.prototype), "Description_block"));
+	($mol_mem(($.$hyoo_bunker_secret_page.prototype), "land"));
+	($mol_mem(($.$hyoo_bunker_secret_page.prototype), "Gifts"));
+	($mol_mem(($.$hyoo_bunker_secret_page.prototype), "Gifts_block"));
 	($mol_mem(($.$hyoo_bunker_secret_page.prototype), "visible"));
 	($mol_mem(($.$hyoo_bunker_secret_page.prototype), "Visible_icon"));
 	($mol_mem(($.$hyoo_bunker_secret_page.prototype), "Visible"));
@@ -14411,6 +14840,9 @@ var $;
             }
             description(next) {
                 return this.secret().description(next);
+            }
+            land() {
+                return this.secret().land();
             }
         }
         $$.$hyoo_bunker_secret_page = $hyoo_bunker_secret_page;

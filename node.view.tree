@@ -523,6 +523,55 @@ $mol_textarea_edit $mol_string
 		^
 		scrollTop 0
 
+$mol_avatar $mol_icon
+	view_box \0 0 24 24
+	id \
+	path \M 12 12 l 0 0 M 0 0 l 0 0 M 24 24 l 0 0 M 0 24 l 0 0 M 24 0 l 0 0
+
+$mol_check_list $mol_view
+	dictionary *
+	Option* $mol_check
+		checked? <=> option_checked*? false
+		label <= option_label* /
+			<= option_title* \
+		enabled <= option_enabled* <= enabled true
+		hint <= option_hint* \
+		minimal_height 24
+	options *
+	keys /string
+	sub <= items /$mol_check
+
+$mol_switch $mol_check_list
+	value? \
+
+$hyoo_crus_land_rights $mol_list
+	land $hyoo_crus_land
+	rows /
+		<= Add $mol_view sub /
+			<= Add_key $mol_string
+				hint @ \public key
+				value? <=> add_key? \
+				commit? <=> add_commit? null
+			<= Add_commit $mol_button_minor
+				click? <=> add_commit? null
+				sub /
+					<= Add_commit_icon $mol_icon_plus
+		^ gifts /
+			<= Gift*0 $mol_view sub /
+				<= Gift_peer* $mol_view sub /
+					<= Gift_avatar* $mol_avatar
+						id <= peer_id* \
+					<= Gift_name* $mol_paragraph
+						title <= peer_name* \
+				<= Gift_rank* $mol_switch
+					value? <=> gift_rank*? \nil
+					options *
+						nil @ \Deny
+						get @ \Read
+						reg @ \Auth
+						mod @ \Mod
+						law @ \Rule
+
 $mol_string_button $mol_string
 
 $mol_row $mol_view
@@ -555,6 +604,10 @@ $hyoo_bunker_secret_page $mol_page
 			name @ \Description
 			Content <= Description $mol_textarea
 				value? <=> description? \
+		<= Gifts_block $mol_form_field
+			name \Rights
+			Content <= Gifts $hyoo_crus_land_rights
+				land <= land $hyoo_crus_land
 	foot /
 		<= Visible $mol_check_icon
 			checked? <=> visible? true

@@ -269,6 +269,11 @@
     "$mol_icon_clipboard",
     "$mol_html_encode",
     "$mol_html",
+    "$hyoo_crus_land_rights",
+    "$mol_avatar",
+    "$mol_switch",
+    "$mol_check_list",
+    "$mol_state_session",
     "$mol_string_button",
     "$hyoo_bunker_actor"
   ],
