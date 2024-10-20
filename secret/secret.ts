@@ -40,7 +40,7 @@ namespace $ {
 		join( lord: $hyoo_crus_ref, rank: $hyoo_crus_rank ) {
 
 			const key = this.$.$hyoo_crus_glob.Node( lord, $hyoo_bunker_peer ).land().key()
-			console.log('key', key)
+			this.land().give( key, rank )
 			this.Values()?.current()?.land().give( key, rank )
 
 			this.Kids()?.keys().forEach( k => {
@@ -53,6 +53,7 @@ namespace $ {
 		deny( lord: $hyoo_crus_ref ) {
 
 			const key = this.$.$hyoo_crus_glob.Node( lord, $hyoo_bunker_peer ).land().key()
+			this.land().give( key, $hyoo_crus_rank.nil )
 			this.Values()?.current()?.land().give( key, $hyoo_crus_rank.nil )
 			this.Values()?.up()
 
@@ -63,9 +64,8 @@ namespace $ {
 		}
 
 		@ $mol_mem
-		lord_ranks() {
-			const land = this.land()
-			return land.joined_list().map( lord => [ lord, land.lord_rank( lord ) ] )
+		ranks() {
+			return $hyoo_bunker_ranks_from_land( this.land() )
 		}
 
 	}
