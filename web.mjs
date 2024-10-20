@@ -6462,6 +6462,170 @@ var $;
 })($ || ($ = {}));
 
 ;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_blob = ($node.buffer?.Blob ?? $mol_dom_context.Blob);
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_clipboard) = class $mol_icon_clipboard extends ($.$mol_icon) {
+		path(){
+			return "M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon_clipboard_outline) = class $mol_icon_clipboard_outline extends ($.$mol_icon) {
+		path(){
+			return "M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_button_copy) = class $mol_button_copy extends ($.$mol_button_minor) {
+		text(){
+			return (this?.title());
+		}
+		text_blob(next){
+			if(next !== undefined) return next;
+			const obj = new this.$.$mol_blob([(this?.text())], {"type": "text/plain"});
+			return obj;
+		}
+		html(){
+			return "";
+		}
+		html_blob(next){
+			if(next !== undefined) return next;
+			const obj = new this.$.$mol_blob([(this?.html())], {"type": "text/html"});
+			return obj;
+		}
+		Icon(){
+			const obj = new this.$.$mol_icon_clipboard_outline();
+			return obj;
+		}
+		title(){
+			return "";
+		}
+		blobs(){
+			return [(this?.text_blob()), (this?.html_blob())];
+		}
+		data(){
+			return {};
+		}
+		sub(){
+			return [(this?.Icon()), (this?.title())];
+		}
+	};
+	($mol_mem(($.$mol_button_copy.prototype), "text_blob"));
+	($mol_mem(($.$mol_button_copy.prototype), "html_blob"));
+	($mol_mem(($.$mol_button_copy.prototype), "Icon"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    const mapping = {
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        '&': '&amp;',
+    };
+    function $mol_html_encode(text) {
+        return text.replace(/[&<">]/gi, str => mapping[str]);
+    }
+    $.$mol_html_encode = $mol_html_encode;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_button_copy extends $.$mol_button_copy {
+            data() {
+                return Object.fromEntries(this.blobs().map(blob => [blob.type, blob]));
+            }
+            html() {
+                return $mol_html_encode(this.text());
+            }
+            attachments() {
+                return [new ClipboardItem(this.data())];
+            }
+            click(event) {
+                const cb = $mol_wire_sync(this.$.$mol_dom_context.navigator.clipboard);
+                cb.writeText?.(this.text());
+                cb.write?.(this.attachments());
+                if (cb.writeText === undefined && cb.write === undefined) {
+                    throw new Error("doesn't support copy to clipoard");
+                }
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_button_copy.prototype, "html", null);
+        __decorate([
+            $mol_mem
+        ], $mol_button_copy.prototype, "attachments", null);
+        $$.$mol_button_copy = $mol_button_copy;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_script) = class $mol_icon_script extends ($.$mol_icon) {
+		path(){
+			return "M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2H8C6.3,2 5,3.3 5,5V16H16V17C16,17.6 16.4,18 17,18H18V5C18,4.4 18.4,4 19,4C19.6,4 20,4.4 20,5V6H22V5C22,3.3 20.7,2 19,2Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_icon_script_text) = class $mol_icon_script_text extends ($.$mol_icon) {
+		path(){
+			return "M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2C20.7,2 22,3.3 22,5V6H20V5C20,4.4 19.6,4 19,4C18.4,4 18,4.4 18,5V18H17C16.4,18 16,17.6 16,17V16H5V5C5,3.3 6.3,2 8,2H19M8,6V8H15V6H8M8,10V12H14V10H8Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_link_source) = class $mol_link_source extends ($.$mol_link) {
+		Icon(){
+			const obj = new this.$.$mol_icon_script_text();
+			return obj;
+		}
+		hint(){
+			return (this.$.$mol_locale.text("$mol_link_source_hint"));
+		}
+		sub(){
+			return [(this?.Icon())];
+		}
+	};
+	($mol_mem(($.$mol_link_source.prototype), "Icon"));
+
+
+;
+"use strict";
+
+;
 	($.$mol_icon_plus) = class $mol_icon_plus extends ($.$mol_icon) {
 		path(){
 			return "M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z";
@@ -13405,129 +13569,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-"use strict";
-var $;
-(function ($) {
-    $.$mol_blob = ($node.buffer?.Blob ?? $mol_dom_context.Blob);
-})($ || ($ = {}));
-
-;
-	($.$mol_icon_clipboard) = class $mol_icon_clipboard extends ($.$mol_icon) {
-		path(){
-			return "M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3";
-		}
-	};
-
-
-;
-"use strict";
-
-;
-	($.$mol_icon_clipboard_outline) = class $mol_icon_clipboard_outline extends ($.$mol_icon) {
-		path(){
-			return "M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z";
-		}
-	};
-
-
-;
-"use strict";
-
-;
-	($.$mol_button_copy) = class $mol_button_copy extends ($.$mol_button_minor) {
-		text(){
-			return (this?.title());
-		}
-		text_blob(next){
-			if(next !== undefined) return next;
-			const obj = new this.$.$mol_blob([(this?.text())], {"type": "text/plain"});
-			return obj;
-		}
-		html(){
-			return "";
-		}
-		html_blob(next){
-			if(next !== undefined) return next;
-			const obj = new this.$.$mol_blob([(this?.html())], {"type": "text/html"});
-			return obj;
-		}
-		Icon(){
-			const obj = new this.$.$mol_icon_clipboard_outline();
-			return obj;
-		}
-		title(){
-			return "";
-		}
-		blobs(){
-			return [(this?.text_blob()), (this?.html_blob())];
-		}
-		data(){
-			return {};
-		}
-		sub(){
-			return [(this?.Icon()), (this?.title())];
-		}
-	};
-	($mol_mem(($.$mol_button_copy.prototype), "text_blob"));
-	($mol_mem(($.$mol_button_copy.prototype), "html_blob"));
-	($mol_mem(($.$mol_button_copy.prototype), "Icon"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    const mapping = {
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        '&': '&amp;',
-    };
-    function $mol_html_encode(text) {
-        return text.replace(/[&<">]/gi, str => mapping[str]);
-    }
-    $.$mol_html_encode = $mol_html_encode;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_button_copy extends $.$mol_button_copy {
-            data() {
-                return Object.fromEntries(this.blobs().map(blob => [blob.type, blob]));
-            }
-            html() {
-                return $mol_html_encode(this.text());
-            }
-            attachments() {
-                return [new ClipboardItem(this.data())];
-            }
-            click(event) {
-                const cb = $mol_wire_sync(this.$.$mol_dom_context.navigator.clipboard);
-                cb.writeText?.(this.text());
-                cb.write?.(this.attachments());
-                if (cb.writeText === undefined && cb.write === undefined) {
-                    throw new Error("doesn't support copy to clipoard");
-                }
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_button_copy.prototype, "html", null);
-        __decorate([
-            $mol_mem
-        ], $mol_button_copy.prototype, "attachments", null);
-        $$.$mol_button_copy = $mol_button_copy;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
 	($.$mol_text_code) = class $mol_text_code extends ($.$mol_stack) {
 		sidebar_showed(){
 			return false;
@@ -14673,6 +14714,20 @@ var $;
 
 ;
 	($.$hyoo_bunker_app) = class $hyoo_bunker_app extends ($.$mol_book2_catalog) {
+		key_public(){
+			return "";
+		}
+		Key_copy(){
+			const obj = new this.$.$mol_button_copy();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$hyoo_bunker_app_Key_copy_hint")));
+			(obj.text) = () => ((this?.key_public()));
+			return obj;
+		}
+		Source(){
+			const obj = new this.$.$mol_link_source();
+			(obj.uri) = () => ("https://github.com/hyoo-ru/bunker.hyoo.ru/");
+			return obj;
+		}
 		secret_new(next){
 			if(next !== undefined) return next;
 			return null;
@@ -14707,12 +14762,18 @@ var $;
 			return (this.$.$mol_locale.text("$hyoo_bunker_app_menu_title"));
 		}
 		menu_tools(){
-			return [(this?.Secret_new())];
+			return [
+				(this?.Key_copy()), 
+				(this?.Source()), 
+				(this?.Secret_new())
+			];
 		}
 		Spread(id){
 			return (this?.Secret(id));
 		}
 	};
+	($mol_mem(($.$hyoo_bunker_app.prototype), "Key_copy"));
+	($mol_mem(($.$hyoo_bunker_app.prototype), "Source"));
 	($mol_mem(($.$hyoo_bunker_app.prototype), "secret_new"));
 	($mol_mem(($.$hyoo_bunker_app.prototype), "Secret_new_icon"));
 	($mol_mem(($.$hyoo_bunker_app.prototype), "Secret_new"));
@@ -14769,6 +14830,9 @@ var $;
             }
             secret(id) {
                 return this.$.$hyoo_crus_glob.Node($hyoo_crus_ref(id), $hyoo_bunker_secret);
+            }
+            key_public() {
+                return this.$.$hyoo_crus_auth.current().public().toString();
             }
         }
         __decorate([

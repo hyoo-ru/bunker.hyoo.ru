@@ -1,4 +1,5 @@
 {
+	"$hyoo_bunker_app_Key_copy_hint": "Copy Public Key",
 	"$hyoo_bunker_app_Secret_new_hint": "New Secret",
 	"$hyoo_bunker_app_menu_title": "Bunker",
 	"$hyoo_bunker_secret_page_Description_block_name": "Description",
@@ -11,6 +12,7 @@
 	"$hyoo_crus_land_rights_Gift_rank_options_nil": "Deny",
 	"$hyoo_crus_land_rights_Gift_rank_options_reg": "Auth",
 	"$mol_book2_catalog_Spread_close_hint": "Close page",
+	"$mol_link_source_hint": "Source code",
 	"$mol_search_Clear_hint": "Clear",
 	"$mol_search_hint": "Search...",
 	"$mol_text_code_Copy_hint": "Copy whole code"
