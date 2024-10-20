@@ -24,5 +24,9 @@ namespace $.$$ {
 			return this.$.$hyoo_crus_glob.Node( $hyoo_crus_ref(id), $hyoo_bunker_secret )
 		}
 		
+		override key_public() {
+			return this.$.$hyoo_crus_auth.current().public().toString()
+		}
+		
 	}
 }

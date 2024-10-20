@@ -1,6 +1,11 @@
 $hyoo_bunker_app $mol_book2_catalog
 	menu_title @ \Bunker
 	menu_tools /
+		<= Key_copy $mol_button_copy
+			hint @ \Copy Public Key
+			text <= key_public \
+		<= Source $mol_link_source
+			uri \https://github.com/hyoo-ru/bunker.hyoo.ru/
 		<= Secret_new $mol_button_minor
 			hint @ \New Secret
 			click? <=> secret_new? null
