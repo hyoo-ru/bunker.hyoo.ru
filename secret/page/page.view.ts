@@ -13,5 +13,9 @@ namespace $.$$ {
 			return this.secret().description( next )
 		}
 		
+		land() {
+			return this.secret().land()
+		}
+		
 	}
 }
