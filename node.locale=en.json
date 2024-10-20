@@ -1,9 +1,11 @@
 {
 	"$hyoo_bunker_app_Secret_new_hint": "New Secret",
 	"$hyoo_bunker_app_menu_title": "Bunker",
+	"$hyoo_bunker_secret_page_Description_block_name": "Description",
 	"$hyoo_bunker_secret_page_Title_hint": "name",
-	"$hyoo_bunker_secret_page_Value_hint": "value",
+	"$hyoo_bunker_secret_page_Value_block_name": "Last Value",
 	"$mol_book2_catalog_Spread_close_hint": "Close page",
 	"$mol_search_Clear_hint": "Clear",
-	"$mol_search_hint": "Search..."
+	"$mol_search_hint": "Search...",
+	"$mol_text_code_Copy_hint": "Copy whole code"
 }
