@@ -15,6 +15,10 @@ namespace $ {
 			return this.Secrets( null )!.make({ '': $hyoo_crus_rank.nil })
 		}
 		
+		secret_listed( secret: $hyoo_crus_ref, next?: boolean ) {
+			return this.Secrets( next )?.has( secret, next )  ?? false
+		}
+		
 	}
 	
 }

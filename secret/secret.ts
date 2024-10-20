@@ -4,11 +4,17 @@ namespace $ {
 		Parent: $hyoo_crus_atom_ref_to( ()=> $hyoo_bunker_secret ),
 		Kids: $hyoo_crus_dict_to( $hyoo_crus_atom_ref_to( ()=> $hyoo_bunker_secret ) ),
 		Values: $hyoo_bunker_values,
+		Description: $hyoo_crus_text,
 	}){
 
 		@ $mol_mem
 		value( next?: string ) {
 			return this.Values( next )?.current( next )?.val( next ) ?? ''
+		}
+		
+		@ $mol_mem
+		description( next?: string ) {
+			return this.Description( next )?.text( next ) ?? ''
 		}
 
 		kid( path: string[], auto?: 'auto' ): $hyoo_bunker_secret | null | undefined {

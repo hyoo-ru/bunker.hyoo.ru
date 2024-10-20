@@ -11,6 +11,10 @@ namespace $.$$ {
 			return this.actor().secrets().map( secret => secret.ref().description! )
 		}
 		
+		secret_visible( id: string, next?: boolean ) {
+			return this.actor().secret_listed( $hyoo_crus_ref( id ), next )
+		}
+		
 		override secret_new() {
 			const secret = this.actor().secret_make()
 			this.$.$mol_state_arg.go({ '': secret.ref().description! })

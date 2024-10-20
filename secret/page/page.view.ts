@@ -9,5 +9,9 @@ namespace $.$$ {
 			return this.secret().value( next )
 		}
 		
+		description( next?: string ) {
+			return this.secret().description( next )
+		}
+		
 	}
 }
