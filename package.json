@@ -274,9 +274,10 @@
     "$mol_syntax2",
     "$hyoo_crus_land_rights",
     "$mol_avatar",
-    "$mol_switch",
-    "$mol_check_list",
-    "$mol_state_session",
+    "$mol_select",
+    "$mol_pick",
+    "$mol_icon_dots_vertical",
+    "$mol_icon_dots",
     "$mol_string_button",
     "$hyoo_bunker_actor"
   ],
