@@ -12,7 +12,7 @@ namespace $ {
 		
 		@ $mol_action
 		secret_make() {
-			return this.Secrets( null )!.make({ '': $hyoo_crus_rank.nil })
+			return this.Secrets( null )!.make({ '': $hyoo_crus_rank_deny })
 		}
 		
 		secret_listed( secret: $hyoo_crus_ref, next?: boolean ) {

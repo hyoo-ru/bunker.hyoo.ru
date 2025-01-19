@@ -70,9 +70,9 @@ namespace $ {
 		}
 
 		@ $mol_action
-		join( path: string, lord_str: string, rank_str: string ) {
+		join( path: string, lord_str: string, rank_str: keyof typeof $hyoo_crus_rank_tier ) {
 			const lord = $hyoo_crus_ref( lord_str )
-			const rank = $hyoo_crus_rank[ rank_str as keyof typeof $hyoo_crus_rank ]
+			const rank = $hyoo_crus_rank_make( rank_str, 'just' )
 			return this._secret( path )?.join( lord, rank )
 		}
 
