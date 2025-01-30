@@ -26,18 +26,18 @@ namespace $ {
 			
 		},
 		
-		// async 'Set and get value in deep kid'( $ ) {
+		 async 'Set and get value in deep kid'( $ ) {
 
-		// 	const land = $.$hyoo_crus_glob.home().land()
-		// 	const secret = land.Node( $hyoo_bunker_secret ).Item('')
+		 	const land = $.$hyoo_crus_glob.home().land()
+		 	const secret = land.Node( $hyoo_bunker_secret ).Item('')
 
-		// 	const kid = (await $mol_wire_async(secret).kid( ['kid1', 'kid2', 'kid3'], 'auto' ))!
+		 	const kid = (await $mol_wire_async(secret).kid( ['kid1', 'kid2', 'kid3'], 'auto' ))!
 
-		// 	await $mol_wire_async(kid).value( 'kid3-value' )
+		 	await $mol_wire_async(kid).value( 'kid3-value' )
 
-		// 	$mol_assert_equal( kid.value(), 'kid3-value' )
+		 	$mol_assert_equal( kid.value(), 'kid3-value' )
 			
-		// },
+		 },
 
 	})
 	
