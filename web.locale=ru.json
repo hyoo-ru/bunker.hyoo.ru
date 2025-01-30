@@ -1,4 +1,10 @@
 {
+	"$hyoo_crus_land_rights_Add_key_hint": "Публичный ключ",
+	"$hyoo_crus_land_rights_Gift_rank_dictionary_deny": "🛑 Запрет",
+	"$hyoo_crus_land_rights_Gift_rank_dictionary_join": "📢 Вход",
+	"$hyoo_crus_land_rights_Gift_rank_dictionary_post": "✍ Запись",
+	"$hyoo_crus_land_rights_Gift_rank_dictionary_read": "👀 Чтение",
+	"$hyoo_crus_land_rights_Gift_rank_dictionary_rule": "👑 Власть",
 	"$mol_book2_catalog_Spread_close_hint": "Закрыть страницу",
 	"$mol_link_source_hint": "Исходные коды",
 	"$mol_search_Clear_hint": "Очистить",

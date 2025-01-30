@@ -227,8 +227,10 @@ $mol_search $mol_pop
 				sub /
 					<= Clear_icon $mol_icon_close
 	bubble_content /$mol_view_content
-		<= Menu $mol_list
-			rows <= menu_items /$mol_view
+		<= Bubble_pane $mol_scroll
+			sub /
+				<= Menu $mol_list
+					rows <= menu_items /$mol_view
 	Suggest* $mol_button_minor
 		click?event <=> suggest_select*?event null
 		sub <= suggest_content* /$mol_view_content
@@ -259,7 +261,7 @@ $mol_link $mol_view
 
 $mol_page $mol_view
 	dom_name \article
-	field *
+	attr *
 		^
 		tabIndex <= tabindex -1
 	sub /
@@ -310,9 +312,10 @@ $mol_book2_catalog $mol_book2
 				<= Menu_filter $mol_search
 					query? <=> menu_filter? \
 				<= Menu_links $mol_list
+					Empty <= Menu_links_empty $mol_view
 					rows <= menu_links /
 						<= Menu_link*0 $mol_link
-							arg <= arg* *
+							arg <= menu_link_arg* <= arg* *
 							sub <= menu_link_content* /
 								<= Menu_link_title* $mol_dimmer
 									needle <= menu_filter
@@ -416,7 +419,7 @@ $mol_text_code_token_link $mol_text_code_token
 		href <= uri \
 		target \_blank
 
-$mol_text_code_row $mol_paragraph
+$mol_text_code_line $mol_paragraph
 	text \
 	minimal_height 24
 	numb_showed true
@@ -447,7 +450,7 @@ $mol_text_code $mol_stack
 		<= Rows $mol_list
 			render_visible_only <= render_visible_only false
 			rows <= rows /
-				<= Row*0 $mol_text_code_row
+				<= Row*0 $mol_text_code_line
 					numb_showed <= sidebar_showed
 					numb <= row_numb* 0
 					text <= row_text* \
@@ -483,6 +486,7 @@ $mol_textarea $mol_stack
 			row_numb* <= row_numb* 0
 			sidebar_showed <= sidebar_showed
 			highlight <= highlight \
+			syntax <= syntax $mol_syntax2
 	symbols_alt *string
 		comma \<
 		period \>
@@ -592,9 +596,9 @@ $hyoo_crus_land_rights $mol_list
 	rows /
 		<= Add $mol_view sub /
 			<= Add_key $mol_string
-				hint @ \public key
+				hint @ \Public key
 				value? <=> add_key? \
-				commit? <=> add_commit? null
+				submit? <=> add_commit? null
 			<= Add_commit $mol_button_minor
 				click? <=> add_commit? null
 				sub /
@@ -609,11 +613,11 @@ $hyoo_crus_land_rights $mol_list
 				<= Gift_rank* $mol_select
 					value? <=> gift_rank*? \nil
 					dictionary *
-						nil @ \🛑 Deny
-						get @ \👀 Read
-						reg @ \📢 Auth
-						mod @ \✍ Post
-						law @ \👑 Rule
+						deny @ \🛑 Deny
+						read @ \👀 Read
+						join @ \📢 Join
+						post @ \✍ Post
+						rule @ \👑 Rule
 
 $mol_string_button $mol_string
 
