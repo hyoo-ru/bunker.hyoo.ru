@@ -4,7 +4,8 @@ namespace $ {
 		const ranks: $hyoo_crus_rank_preset = {}
 		
 		for (const [lord, gift] of land.gift.entries()) {
-			const auth = land.key()!
+			const auth = $hyoo_crus_glob.Node( $hyoo_crus_ref(lord), $hyoo_bunker_peer ).land().auth().public()
+
 			const rank = gift.rank()
 			const key = auth.toString()
 			if( key == $hyoo_crus_auth.current().public().toString() ) continue
