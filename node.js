@@ -15715,7 +15715,7 @@ var $;
                 return this.$.$hyoo_crus_glob.Node($hyoo_crus_ref(id), $hyoo_crus_entity).title() || id;
             }
             gift_rank(id, next) {
-                return $hyoo_crus_rank_tier[this.land().lord_rank($hyoo_crus_ref(id), next && $hyoo_crus_rank_make(next, 'just'))];
+                return $hyoo_crus_rank_tier[this.land().lord_rank($hyoo_crus_ref(id), next && $hyoo_crus_rank_make(next, 'just')) & 0b0_1111_0000];
             }
             add_commit() {
                 const auth = $hyoo_crus_auth.from(this.add_key());
