@@ -15650,7 +15650,7 @@ var $;
 		}
 		gift_rank(id, next){
 			if(next !== undefined) return next;
-			return "nil";
+			return "deny";
 		}
 		Gift_rank(id){
 			const obj = new this.$.$mol_select();
