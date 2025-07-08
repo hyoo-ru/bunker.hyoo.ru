@@ -315,7 +315,7 @@ var $;
         emit(quant = $mol_wire_cursor.stale) {
             for (let i = this.sub_from; i < this.data.length; i += 2) {
                 ;
-                this.data[i].absorb(quant);
+                this.data[i].absorb(quant, this.data[i + 1]);
             }
         }
         peer_move(from_pos, to_pos) {
@@ -566,7 +566,7 @@ var $;
                 pub?.complete();
             }
         }
-        absorb(quant = $mol_wire_cursor.stale) {
+        absorb(quant = $mol_wire_cursor.stale, pos = -1) {
             if (this.cursor === $mol_wire_cursor.final)
                 return;
             if (this.cursor >= quant)
@@ -15378,6 +15378,9 @@ var $;
 
 ;
 	($.$mol_select) = class $mol_select extends ($.$mol_pick) {
+		enabled(){
+			return true;
+		}
 		event_select(id, next){
 			if(next !== undefined) return next;
 			return null;
@@ -15439,9 +15442,6 @@ var $;
 			if(next !== undefined) return next;
 			return null;
 		}
-		enabled(){
-			return true;
-		}
 		dictionary(next){
 			if(next !== undefined) return next;
 			return {};
@@ -15458,6 +15458,7 @@ var $;
 		}
 		Option_row(id){
 			const obj = new this.$.$mol_button_minor();
+			(obj.enabled) = () => ((this.enabled()));
 			(obj.event_click) = (next) => ((this.event_select(id, next)));
 			(obj.sub) = () => ((this.option_content(id)));
 			return obj;
