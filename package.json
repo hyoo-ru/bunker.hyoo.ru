@@ -284,6 +284,8 @@
     "$mol_check",
     "$mol_form_field",
     "$mol_form",
+    "$mol_button_major",
+    "$mol_status",
     "$mol_row",
     "$mol_labeler",
     "$mol_textarea",
