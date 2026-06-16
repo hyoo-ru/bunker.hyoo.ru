@@ -13229,6 +13229,7 @@ var $;
      * Payload >= 2^32 isn't supported
      */
     class $mol_websocket_frame extends $mol_buffer {
+        /** Kind of socket frame. */
         kind(next) {
             if (next) {
                 this.setUint8(0, Number(next.fin) << 7 | $mol_websocket_frame_op[next.op]);
@@ -13243,6 +13244,7 @@ var $;
                 return { op, fin };
             }
         }
+        /** Payload info. */
         data(next) {
             if (next === undefined) {
                 const state = this.getUint8(1);
@@ -13269,11 +13271,15 @@ var $;
                 return next;
             }
         }
+        /** Header size (2..14). */
         size() {
+            if (this.byteLength < 2)
+                return 2;
             const short = this.getUint8(1) & 0b0111_1111;
             const mask = this.getUint8(1) >> 7;
             return (short === 127 ? 10 : short === 126 ? 4 : 2) + (mask ? 4 : 0);
         }
+        /** 4 byte mask. */
         mask() {
             return new Uint8Array(this.buffer, this.byteOffset + this.size() - 4, 4);
         }
